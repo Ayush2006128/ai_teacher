@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "AI Teacher",
-      home: HomePage(),
+      home: MyHomePage(),
     );
   }
 }
