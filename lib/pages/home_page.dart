@@ -1,4 +1,5 @@
 import 'package:ai_teacher/pages/saved_answers.dart';
+import 'package:ai_teacher/widgets/add_image.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
 import 'package:ai_teacher/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -53,8 +54,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Home Page'),
+    return Center(
+      child: AddImage(onTap: onTap),
     );
+  }
+
+  void onTap() {
+    print("tapped");
   }
 }

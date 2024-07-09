@@ -42,7 +42,35 @@ class _AddImageState extends State<AddImage> {
           hovered = false;
         });
       },
-      child: GestureDetector(),
+      child: GestureDetector(
+        onTapDown: (details) {
+          setState(() {
+            tapped = true;
+          });
+        },
+        onTapUp: (details) {
+          setState(() {
+            tapped = false;
+          });
+          widget.onTap();
+        },
+        child: SizedBox(
+          width: widget.width,
+          height: widget.height,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: Container(
+              decoration: const BoxDecoration(color: Colors.blueGrey),
+              child: const Center(
+                child: Icon(
+                  Icons.add_a_photo_rounded,
+                  size: 32,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
