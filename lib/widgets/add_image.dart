@@ -20,12 +20,21 @@ class _AddImageState extends State<AddImage> {
   bool tapped = false;
   bool hovered = false;
 
-  Color get color {
+  Color get buttonColor {
     var state = (hovered, tapped);
     return switch (state) {
       (_, true) => Colors.black,
       (true, _) => Colors.grey,
       (_, _) => Colors.white,
+    };
+  }
+
+  Color get iconColor {
+    var state = (hovered, tapped);
+    return switch (state) {
+      (_, true) => Colors.white,
+      (true, _) => Colors.black,
+      (_, _) => Colors.black,
     };
   }
 
@@ -60,11 +69,14 @@ class _AddImageState extends State<AddImage> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: Container(
-              decoration: const BoxDecoration(color: Colors.blueGrey),
-              child: const Center(
+              decoration: BoxDecoration(
+                color: buttonColor,
+              ),
+              child: Center(
                 child: Icon(
                   Icons.add_a_photo_rounded,
                   size: 32,
+                  color: iconColor,
                 ),
               ),
             ),

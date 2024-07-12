@@ -3,6 +3,9 @@ import 'package:ai_teacher/widgets/add_image.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
 import 'package:ai_teacher/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter/services.dart';
+import 'package:camera/camera.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -59,7 +62,16 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void onTap() {
-    print("tapped");
+  Future<void> onTap() async {
+    var imagePicked;
+    // image picker
+
+    // image gallery
+    try {
+      await availableCameras();
+      imagePicked = ImagePicker().pickImage(source: ImageSource.camera);
+    } catch (e) {
+      imagePicked = ImagePicker().pickImage(source: ImageSource.gallery);
+    }
   }
 }
