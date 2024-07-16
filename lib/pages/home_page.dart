@@ -1,11 +1,10 @@
 import 'package:ai_teacher/pages/saved_answers.dart';
 import 'package:ai_teacher/widgets/add_image.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
+import 'package:ai_teacher/widgets/image_widget.dart';
 import 'package:ai_teacher/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/services.dart';
-import 'package:camera/camera.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -16,7 +15,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> _pages = [
-    const HomePage(),
+    HomePage(),
     const SavedAnswersPage(),
   ];
 
@@ -52,26 +51,40 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<XFile> imagePicked = [];
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: AddImage(onTap: onTap),
+      child: Row(
+        children: [
+          AddImage(
+            onTap: _addImage,
+          ),
+          ImageWidget(
+            imagePicked: imagePicked,
+          ),
+        ],
+      ),
     );
   }
 
-  Future<void> onTap() async {
-    var imagePicked;
-    // image picker
+  Future<void> _addImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    // image gallery
-    try {
-      await availableCameras();
-      imagePicked = ImagePicker().pickImage(source: ImageSource.camera);
-    } catch (e) {
-      imagePicked = ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        imagePicked.add(pickedFile);
+      });
     }
   }
 }
