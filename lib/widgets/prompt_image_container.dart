@@ -13,7 +13,7 @@ class PromptImageContainer extends StatefulWidget {
 }
 
 class _PromptImageContainerState extends State<PromptImageContainer> {
-  List<XFile> _imagePicked = [];
+  final List<XFile> _imagePicked = [];
 
   @override
   Widget build(BuildContext context) {
