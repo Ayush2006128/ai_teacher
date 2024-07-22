@@ -3,6 +3,7 @@ import 'package:ai_teacher/widgets/add_image.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
 import 'package:ai_teacher/widgets/image_widget.dart';
 import 'package:ai_teacher/widgets/nav_bar.dart';
+import 'package:ai_teacher/widgets/prompt_image_container.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -59,32 +60,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<XFile> imagePicked = [];
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        children: [
-          AddImage(
-            onTap: _addImage,
-          ),
-          ImageWidget(
-            imagePicked: imagePicked,
-          ),
-        ],
-      ),
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: Column(children: [
+        PromptImageContainer(
+          width: 0.8,
+          height: 0.5,
+        ),
+      ]),
     );
-  }
-
-  Future<void> _addImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      setState(() {
-        imagePicked.add(pickedFile);
-      });
-    }
   }
 }
