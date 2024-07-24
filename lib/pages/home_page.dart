@@ -1,11 +1,8 @@
 import 'package:ai_teacher/pages/saved_answers.dart';
-import 'package:ai_teacher/widgets/add_image.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
-import 'package:ai_teacher/widgets/image_widget.dart';
 import 'package:ai_teacher/widgets/nav_bar.dart';
 import 'package:ai_teacher/widgets/prompt_image_container.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -16,7 +13,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> _pages = [
-    HomePage(),
+    const HomePage(),
     const SavedAnswersPage(),
   ];
 
@@ -64,12 +61,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      child: Column(children: [
-        PromptImageContainer(
-          width: 0.8,
-          height: 0.5,
-        ),
-      ]),
+      width: double.infinity,
+      height: double.infinity,
+      child: const PromptImageContainer(),
     );
   }
 }

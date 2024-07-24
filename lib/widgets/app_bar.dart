@@ -1,3 +1,5 @@
+// ignore_for_file: overridden_fields
+
 import 'package:flutter/material.dart';
 
 class MyAppBar extends AppBar {
@@ -8,13 +10,12 @@ class MyAppBar extends AppBar {
   final List<Widget> actions;
 
   MyAppBar({
-    Key? key,
+    super.key,
     required this.title,
     this.backgroundColor,
     required this.actions,
   });
 
-  @override
   Widget build(BuildContext context) {
     return AppBar(
       title: title,

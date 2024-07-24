@@ -32,7 +32,7 @@ class _ImageWidgetState extends State<ImageWidget> {
             top: 0,
             right: 0,
             child: IconButton(
-              icon: Icon(Icons.close),
+              icon: const Icon(Icons.close),
               onPressed: () => _onRemove(i),
               iconSize: 20,
             ),
