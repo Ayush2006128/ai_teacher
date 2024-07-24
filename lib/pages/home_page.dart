@@ -63,7 +63,10 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.all(20),
       width: double.infinity,
       height: double.infinity,
-      child: const PromptImageContainer(),
+      child: PromptImageContainer(
+        width: 0.8,
+        height: 0.5,
+      ),
     );
   }
 }
