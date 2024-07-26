@@ -1,8 +1,10 @@
 import 'package:ai_teacher/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
+  await dotenv.load();
 }
 
 class MyApp extends StatelessWidget {

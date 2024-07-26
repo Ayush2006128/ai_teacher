@@ -1,8 +1,10 @@
 import 'package:ai_teacher/pages/saved_answers.dart';
+import 'package:ai_teacher/widgets/add_image.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
 import 'package:ai_teacher/widgets/nav_bar.dart';
 import 'package:ai_teacher/widgets/prompt_image_container.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -57,6 +59,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<XFile> imagePicked = [];
+
+  Future<void> _addImage() async {
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      setState(() {
+        imagePicked.add(pickedImage);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -64,6 +78,8 @@ class _HomePageState extends State<HomePage> {
       width: double.infinity,
       height: double.infinity,
       child: PromptImageContainer(
+        imagePicked: imagePicked,
+        imgPicker: AddImage(onTap: _addImage),
         width: 0.8,
         height: 0.5,
       ),
