@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:ai_teacher/pages/saved_answers.dart';
+import 'package:ai_teacher/services/gemini.dart';
 import 'package:ai_teacher/widgets/add_image.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
 import 'package:ai_teacher/widgets/nav_bar.dart';
 import 'package:ai_teacher/widgets/prompt_image_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image_picker/image_picker.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -63,12 +68,23 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _addImage() async {
     final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.camera);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         imagePicked.add(pickedImage);
       });
     }
+  }
+
+  Future<void> _getResults() async {
+    final apiKey = dotenv.get('API_KEY');
+    ModelClass modelClass = ModelClass(
+        GenerativeModel(model: 'gemini-1.5-pro-latest', apiKey: apiKey),
+        "solve this problem.",
+        File(imagePicked[0].path));
+
+    final response = await modelClass.generate();
+    print(response);
   }
 
   @override
@@ -77,11 +93,30 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.all(20),
       width: double.infinity,
       height: double.infinity,
-      child: PromptImageContainer(
-        imagePicked: imagePicked,
-        imgPicker: AddImage(onTap: _addImage),
-        width: 0.8,
-        height: 0.5,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: PromptImageContainer(
+              imagePicked: imagePicked,
+              imgPicker: AddImage(onTap: _addImage),
+              width: 0.8,
+              height: 0.5,
+            ),
+          ),
+          const SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: _getResults,
+            style: ElevatedButton.styleFrom(
+                minimumSize: const Size(200, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.black),
+            child: const Text('Submit'),
+          )
+        ],
       ),
     );
   }
