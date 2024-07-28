@@ -4,7 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
-  await dotenv.load(fileName: "../assets/.env");
+  await dotenv.load(fileName: ".env");
 }
 
 class MyApp extends StatelessWidget {

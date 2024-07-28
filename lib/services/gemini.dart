@@ -9,9 +9,14 @@ class ModelClass {
   ModelClass(this.model, this.prompt, this.image);
 
   Future<GenerateContentResponse> generate() async {
-    return await model.generateContent(Content.multi([
-      TextPart(prompt ?? ''),
-      DataPart('image/png', image!.readAsBytesSync()),
-    ]) as Iterable<Content>);
+    final content = [
+      Content.multi([
+        TextPart(prompt ?? ''),
+        DataPart('image/png', image!.readAsBytesSync()),
+      ])
+    ];
+
+    final response = await model.generateContent(content);
+    return response;
   }
 }

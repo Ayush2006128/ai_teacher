@@ -79,12 +79,12 @@ class _HomePageState extends State<HomePage> {
   Future<void> _getResults() async {
     final apiKey = dotenv.get('API_KEY');
     ModelClass modelClass = ModelClass(
-        GenerativeModel(model: 'gemini-1.5-pro-latest', apiKey: apiKey),
-        "solve this problem.",
+        GenerativeModel(model: 'gemini-1.5-flash-latest', apiKey: apiKey),
+        "explain this problem.",
         File(imagePicked[0].path));
 
     final response = await modelClass.generate();
-    print(response);
+    print(response.text);
   }
 
   @override
