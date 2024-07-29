@@ -1,14 +1,10 @@
-import 'dart:io';
-
 import 'package:ai_teacher/pages/saved_answers.dart';
-import 'package:ai_teacher/services/gemini.dart';
+import 'package:ai_teacher/utils/answer_generation.dart';
 import 'package:ai_teacher/widgets/add_image.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
 import 'package:ai_teacher/widgets/nav_bar.dart';
 import 'package:ai_teacher/widgets/prompt_image_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image_picker/image_picker.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -64,8 +60,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<XFile> imagePicked = [];
-
   Future<void> _addImage() async {
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -74,17 +68,6 @@ class _HomePageState extends State<HomePage> {
         imagePicked.add(pickedImage);
       });
     }
-  }
-
-  Future<void> _getResults() async {
-    final apiKey = dotenv.get('API_KEY');
-    ModelClass modelClass = ModelClass(
-        GenerativeModel(model: 'gemini-1.5-flash-latest', apiKey: apiKey),
-        "explain this problem.",
-        File(imagePicked[0].path));
-
-    final response = await modelClass.generate();
-    print(response.text);
   }
 
   @override
@@ -106,7 +89,10 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 10),
           ElevatedButton(
-            onPressed: _getResults,
+            onPressed: () {
+              getResults();
+              Navigator.pushNamed(context, '/answer_page');
+            },
             style: ElevatedButton.styleFrom(
                 minimumSize: const Size(200, 50),
                 shape: RoundedRectangleBorder(

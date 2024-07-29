@@ -1,3 +1,4 @@
+import 'package:ai_teacher/pages/answer_page.dart';
 import 'package:ai_teacher/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -18,7 +19,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MyHomePage(),
+        '/answer_page': (context) => const AnswerPage(),
+      },
     );
   }
 }
