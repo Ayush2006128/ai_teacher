@@ -11,26 +11,36 @@ class AnswerPage extends StatefulWidget {
 }
 
 class _AnswerPageState extends State<AnswerPage> {
+  bool isReady = false;
+  bool isReadyFunc() {
+    if (response != null) {
+      setState(() {
+        isReady = true;
+      });
+    }
+    return isReady;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MyAppBar(
-          title: const Text('AI Teacher'),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_left_rounded))
-          ],
-          backgroundColor: Colors.transparent,
-        ),
-        body: Center(
-          child: response != null
+      appBar: MyAppBar(
+        title: const Text('AI Teacher'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_left_rounded))
+        ],
+        backgroundColor: Colors.transparent,
+      ),
+      body: Center(
+          child: isReadyFunc()
               ? Markdown(data: response!.text ?? '')
               : const CircularProgressIndicator(
                   color: Colors.black,
-                ),
-        ));
+                )),
+    );
   }
 }

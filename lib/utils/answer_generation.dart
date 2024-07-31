@@ -16,6 +16,7 @@ Future<void> getResults() async {
       GenerativeModel(model: 'gemini-1.5-flash-latest', apiKey: apiKey),
       Prompt,
       File(imagePicked[0].path));
-
   response = await modelClass.generate();
+
+  print(response?.text);
 }
