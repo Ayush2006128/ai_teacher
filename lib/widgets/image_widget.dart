@@ -27,7 +27,9 @@ class _ImageWidgetState extends State<ImageWidget> {
     return Column(children: [
       for (int i = 0; i < widget.imagePicked.length; i++)
         Stack(children: [
-          Image.file(File(widget.imagePicked[i].path), width: 100, height: 100),
+          Image.file(File(widget.imagePicked[i].path),
+              width: MediaQuery.of(context).size.width * 0.1,
+              height: MediaQuery.of(context).size.height * 0.1),
           Positioned(
             top: 0,
             right: 0,

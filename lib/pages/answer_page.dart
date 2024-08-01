@@ -24,7 +24,12 @@ class _AnswerPageState extends State<AnswerPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.arrow_left_rounded))
+              icon: const Icon(Icons.arrow_left_rounded)),
+          IconButton(
+              onPressed: () {
+                // saving result in firebase
+              },
+              icon: const Icon(Icons.save_rounded))
         ],
         backgroundColor: Colors.transparent,
       ),
@@ -33,7 +38,10 @@ class _AnswerPageState extends State<AnswerPage> {
         future: response,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Markdown(data: snapshot.data!.text ?? '');
+            return Markdown(
+              data: snapshot.data!.text ?? '',
+              selectable: true,
+            );
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           }

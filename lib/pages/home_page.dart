@@ -4,6 +4,7 @@ import 'package:ai_teacher/widgets/add_image.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
 import 'package:ai_teacher/widgets/nav_bar.dart';
 import 'package:ai_teacher/widgets/prompt_image_container.dart';
+import 'package:ai_teacher/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -60,10 +61,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isDisabled() {
-    return imagePicked.isEmpty;
-  }
-
   Future<void> _addImage() async {
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -92,26 +89,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {
-              if (isDisabled()) {
-                return;
-              }
-              Navigator.pushNamed(context, '/answer_page');
-            },
-            style: ElevatedButton.styleFrom(
-              minimumSize: Size(MediaQuery.of(context).size.width * 0.6,
-                  MediaQuery.of(context).size.height * 0.08),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.black,
-              disabledBackgroundColor: Colors.white,
-              disabledForegroundColor: Colors.white,
-            ),
-            child: const Text('Submit'),
-          )
+          SubmitButton(isDisabled: imagePicked.isEmpty),
         ],
       ),
     );

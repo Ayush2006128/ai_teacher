@@ -21,10 +21,7 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for ios - '
@@ -36,10 +33,7 @@ class DefaultFirebaseOptions {
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -60,4 +54,22 @@ class DefaultFirebaseOptions {
     authDomain: 'ai-teacher-707a1.firebaseapp.com',
     storageBucket: 'ai-teacher-707a1.appspot.com',
   );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyCbTVrSCp2KoI_4GmOfT-X-RZwyW6Dh3hE',
+    appId: '1:152756543521:android:7e00692077b8316c318360',
+    messagingSenderId: '152756543521',
+    projectId: 'ai-teacher-707a1',
+    storageBucket: 'ai-teacher-707a1.appspot.com',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyA6EPJ87cERksWMTsjTGaz4_0ERcV8vLdk',
+    appId: '1:152756543521:web:06a307ba64a1dc71318360',
+    messagingSenderId: '152756543521',
+    projectId: 'ai-teacher-707a1',
+    authDomain: 'ai-teacher-707a1.firebaseapp.com',
+    storageBucket: 'ai-teacher-707a1.appspot.com',
+  );
+
 }

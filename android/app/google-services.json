@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "152756543521",
+    "project_id": "ai-teacher-707a1",
+    "storage_bucket": "ai-teacher-707a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152756543521:android:57a59ac456ef0d6b318360",
+        "android_client_info": {
+          "package_name": "am.ai.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbTVrSCp2KoI_4GmOfT-X-RZwyW6Dh3hE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152756543521:android:7e00692077b8316c318360",
+        "android_client_info": {
+          "package_name": "mt.ai.a"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbTVrSCp2KoI_4GmOfT-X-RZwyW6Dh3hE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
