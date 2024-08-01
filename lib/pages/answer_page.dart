@@ -2,6 +2,7 @@ import 'package:ai_teacher/utils/answer_generation.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:google_generative_ai/src/api.dart';
 
 class AnswerPage extends StatefulWidget {
   const AnswerPage({super.key});
@@ -11,15 +12,7 @@ class AnswerPage extends StatefulWidget {
 }
 
 class _AnswerPageState extends State<AnswerPage> {
-  bool isReady = false;
-  bool isReadyFunc() {
-    if (response != null) {
-      setState(() {
-        isReady = true;
-      });
-    }
-    return isReady;
-  }
+  Future<GenerateContentResponse> response = getResults();
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +29,19 @@ class _AnswerPageState extends State<AnswerPage> {
         backgroundColor: Colors.transparent,
       ),
       body: Center(
-          child: isReadyFunc()
-              ? Markdown(data: response!.text ?? '')
-              : const CircularProgressIndicator(
-                  color: Colors.black,
-                )),
+          child: FutureBuilder<GenerateContentResponse>(
+        future: response,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Markdown(data: snapshot.data!.text ?? '');
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+          return const CircularProgressIndicator(
+            color: Colors.black,
+          );
+        },
+      )),
     );
   }
 }

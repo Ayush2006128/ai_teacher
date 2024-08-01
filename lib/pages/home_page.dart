@@ -60,6 +60,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isDisabled() {
+    return imagePicked.isEmpty;
+  }
+
   Future<void> _addImage() async {
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -90,16 +94,22 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 10),
           ElevatedButton(
             onPressed: () {
-              getResults();
+              if (isDisabled()) {
+                return;
+              }
               Navigator.pushNamed(context, '/answer_page');
             },
             style: ElevatedButton.styleFrom(
-                minimumSize: const Size(200, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.black),
+              minimumSize: Size(MediaQuery.of(context).size.width * 0.6,
+                  MediaQuery.of(context).size.height * 0.08),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.black,
+              disabledBackgroundColor: Colors.white,
+              disabledForegroundColor: Colors.white,
+            ),
             child: const Text('Submit'),
           )
         ],
