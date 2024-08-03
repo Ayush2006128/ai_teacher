@@ -2,6 +2,7 @@ import 'package:ai_teacher/pages/saved_answers.dart';
 import 'package:ai_teacher/utils/answer_generation.dart';
 import 'package:ai_teacher/widgets/add_image.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
+import 'package:ai_teacher/widgets/image_widget.dart';
 import 'package:ai_teacher/widgets/nav_bar.dart';
 import 'package:ai_teacher/widgets/prompt_image_container.dart';
 import 'package:ai_teacher/widgets/submit_button.dart';
@@ -61,12 +62,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Widget> images = [];
+  void _onRemove(int i) {
+    setState(() {
+      images.removeAt(i);
+      imagePicked.removeAt(i);
+    });
+  }
+
   Future<void> _addImage() async {
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         imagePicked.add(pickedImage);
+        for (var i = 0; i < imagePicked.length; i++) {
+          images.add(ImageWidget(
+              imagePicked: pickedImage, onRemove: () => _onRemove(i)));
+        }
       });
     }
   }
@@ -82,14 +95,17 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
             child: PromptImageContainer(
-              imagePicked: imagePicked,
+              imagePicked: images,
               imgPicker: AddImage(onTap: _addImage),
               width: 0.8,
               height: 0.5,
             ),
           ),
           const SizedBox(height: 10),
-          SubmitButton(isDisabled: imagePicked.isEmpty),
+          SubmitButton(
+            isDisabled: imagePicked.isEmpty,
+            onTap: Navigator.pushNamed('/answer_page'),
+          ),
         ],
       ),
     );
