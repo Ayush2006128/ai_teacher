@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 10),
           SubmitButton(
             isDisabled: imagePicked.isEmpty,
-            onTap: _onTap(context),
+            onTap: () => _onTap(context),
           ),
         ],
       ),
