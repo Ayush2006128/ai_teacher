@@ -41,11 +41,13 @@ class _MyHomePageState extends State<MyHomePage> {
           currentIndex: _selectedIndex,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home_filled),
               label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.book),
+              activeIcon: Icon(Icons.book_outlined),
               label: 'Saved Answers',
             ),
           ]),
@@ -104,10 +106,19 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 10),
           SubmitButton(
             isDisabled: imagePicked.isEmpty,
-            onTap: Navigator.pushNamed('/answer_page'),
+            onTap: _onTap(context),
           ),
         ],
       ),
     );
+  }
+  
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:1058954694.
+  void _onTap(BuildContext context) {
+    Navigator.pushNamed(context, '/answer_page');
+    setState(() {
+      images.clear();
+      imagePicked.clear();
+    });
   }
 }

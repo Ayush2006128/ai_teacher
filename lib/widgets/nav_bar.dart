@@ -19,6 +19,11 @@ class NavBar extends BottomNavigationBar {
 
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      selectedItemColor: Colors.black,
+      unselectedItemColor: Colors.grey,
+      currentIndex: currentIndex,
+      showUnselectedLabels: true,
+      showSelectedLabels: false,
       backgroundColor: Colors.white,
       items: items,
       onTap: onTap,
