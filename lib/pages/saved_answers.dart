@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class SavedAnswersPage extends StatelessWidget {
   const SavedAnswersPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('This is the Settings Page'),
+    return Center(
+      child: Lottie.asset("assets/ghost_loading.json"),
     );
   }
 }

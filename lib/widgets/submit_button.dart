@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 
 class SubmitButton extends StatelessWidget {
   final bool isDisabled;
-  final void onTap;
 
-  const SubmitButton(
-      {super.key, required this.isDisabled, required this.onTap});
+  const SubmitButton({
+    super.key,
+    required this.isDisabled,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: isDisabled ? null : () => onTap,
+      onPressed: isDisabled
+          ? null
+          : () {
+              Navigator.pushNamed(context, "/answer_page");
+            },
       style: ElevatedButton.styleFrom(
         minimumSize: Size(MediaQuery.of(context).size.width * 0.6,
             MediaQuery.of(context).size.height * 0.08),

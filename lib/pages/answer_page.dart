@@ -3,6 +3,7 @@ import 'package:ai_teacher/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/src/api.dart';
+import 'package:lottie/lottie.dart';
 
 class AnswerPage extends StatefulWidget {
   const AnswerPage({super.key});
@@ -45,9 +46,7 @@ class _AnswerPageState extends State<AnswerPage> {
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           }
-          return const CircularProgressIndicator(
-            color: Colors.black,
-          );
+          return Lottie.asset("assets/bulb.json");
         },
       )),
     );

@@ -2,12 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-class NavBar extends BottomNavigationBar {
-  @override
-  final List<BottomNavigationBarItem> items;
-  @override
+class NavBar extends NavigationBar {
+  final List<NavigationDestination> items;
   final int currentIndex;
-  @override
   final void Function(int)? onTap;
 
   NavBar({
@@ -15,18 +12,18 @@ class NavBar extends BottomNavigationBar {
     required this.items,
     this.onTap,
     this.currentIndex = 0,
-  }) : super(items: items, onTap: onTap);
+  }) : super(
+          destinations: items,
+          onDestinationSelected: onTap,
+        );
 
+  @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      selectedItemColor: Colors.black,
-      unselectedItemColor: Colors.grey,
-      currentIndex: currentIndex,
-      showUnselectedLabels: true,
-      showSelectedLabels: false,
+    return NavigationBar(
+      selectedIndex: currentIndex,
       backgroundColor: Colors.white,
-      items: items,
-      onTap: onTap,
+      destinations: items,
+      onDestinationSelected: onTap,
     );
   }
 }
