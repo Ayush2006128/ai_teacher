@@ -1,16 +1,15 @@
 # ai_teacher
 
-A new Flutter project.
+A fantastic Flutter project with Gemini AI.
+If got stuck with any problem related to STEM subjects, use this project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. [Install Flutter](https://docs.flutter.dev/get-started/install)
+2. [Clone this repository](https://github.com/Ayush2006128/ai_teacher)
+3. [Get your API key](https://aistudio.google.com)
+4. make a .env file with your API key like this ``` API_KEY=your_api_key ```
+5. run ``` flutter pub get ```
+6. run ``` flutter build apk ```
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+and you should be good to go.
