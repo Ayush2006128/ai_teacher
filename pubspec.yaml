@@ -43,6 +43,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   flutter_markdown: ^0.7.3
   lottie: ^3.1.2
+  cloud_firestore: ^5.2.1
 
 dev_dependencies:
   flutter_test:

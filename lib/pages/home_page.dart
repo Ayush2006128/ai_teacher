@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _addImage() async {
     final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.camera);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         imagePicked.add(pickedImage);

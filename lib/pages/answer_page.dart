@@ -1,9 +1,11 @@
+import 'package:ai_teacher/models/response_model.dart';
 import 'package:ai_teacher/utils/answer_generation.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/src/api.dart';
 import 'package:lottie/lottie.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AnswerPage extends StatefulWidget {
   const AnswerPage({super.key});
@@ -13,7 +15,22 @@ class AnswerPage extends StatefulWidget {
 }
 
 class _AnswerPageState extends State<AnswerPage> {
+  // get result
   Future<GenerateContentResponse> response = getResults();
+
+  // upload response to firebase storage
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  ResponseModel? responseModel;
+
+  @override
+  void initState() {
+    super.initState();
+    response.then((value) {
+      setState(() {
+        responseModel = ResponseModel(text: value.text ?? '', id: 'id');
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +44,12 @@ class _AnswerPageState extends State<AnswerPage> {
               },
               icon: const Icon(Icons.arrow_left_rounded)),
           IconButton(
-              onPressed: () {
+              onPressed: () async {
                 // saving result in firebase
+                await firestore
+                    .collection("/answers")
+                    .doc(responseModel!.id)
+                    .set({"text": responseModel!.text.toString()});
               },
               icon: const Icon(Icons.save_rounded))
         ],
