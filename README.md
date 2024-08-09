@@ -12,4 +12,7 @@ If got stuck with any problem related to STEM subjects, use this project.
 5. run ``` flutter pub get ```
 6. run ``` flutter build apk ```
 
+NOTE it will not work on iPhone and Mac only run it on Android or windows platform 
+ala It has a bugs which are getting killed 
+
 and you should be good to go.
