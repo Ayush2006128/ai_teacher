@@ -13,6 +13,6 @@ If got stuck with any problem related to STEM subjects, use this project.
 6. run ``` flutter build apk ```
 
 NOTE it will not work on iPhone and Mac only run it on Android or windows platform 
-also It has a bugs which are getting fixed  
+also It has a few bugs which are getting fixed  
 
 and you should be good to go.
