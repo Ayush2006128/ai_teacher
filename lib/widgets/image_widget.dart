@@ -5,12 +5,10 @@ import 'package:image_picker/image_picker.dart';
 
 // ignore: must_be_immutable
 class ImageWidget extends StatefulWidget {
-  XFile imagePicked;
-  final void Function() onRemove;
+  List<XFile> imagePicked = [];
   ImageWidget({
     super.key,
     required this.imagePicked,
-    required this.onRemove,
   });
 
   @override
@@ -18,23 +16,28 @@ class ImageWidget extends StatefulWidget {
 }
 
 class _ImageWidgetState extends State<ImageWidget> {
+  void _onRemove(int index) {
+    setState(() {
+      widget.imagePicked.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Stack(children: [
-        Image.file(File(widget.imagePicked.path),
-            width: MediaQuery.of(context).size.width * 0.1,
-            height: MediaQuery.of(context).size.height * 0.1),
-        Positioned(
-          top: 0,
-          right: 0,
-          child: IconButton(
-            icon: const Icon(Icons.close),
-            onPressed: () => widget.onRemove,
-            iconSize: 20,
+      for (int i = 0; i < widget.imagePicked.length; i++)
+        Stack(children: [
+          Image.file(File(widget.imagePicked[i].path), width: 100, height: 100),
+          Positioned(
+            top: 0,
+            right: 0,
+            child: IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () => _onRemove(i),
+              iconSize: 20,
+            ),
           ),
-        ),
-      ])
+        ])
     ]);
   }
 }

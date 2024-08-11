@@ -27,7 +27,7 @@ class _AnswerPageState extends State<AnswerPage> {
     super.initState();
     response.then((value) {
       setState(() {
-        responseModel = ResponseModel(text: value.text ?? '', id: 'id');
+        responseModel = ResponseModel(text: value.text ?? '');
       });
     });
   }
@@ -42,13 +42,13 @@ class _AnswerPageState extends State<AnswerPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.arrow_left_rounded)),
+              icon: const Icon(Icons.close_rounded)),
           IconButton(
               onPressed: () async {
                 // saving result in firebase
                 await firestore
                     .collection("/answers")
-                    .doc(responseModel!.id)
+                    .doc()
                     .set({"text": responseModel!.text.toString()});
               },
               icon: const Icon(Icons.save_rounded))
