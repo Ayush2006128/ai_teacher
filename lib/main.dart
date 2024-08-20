@@ -1,6 +1,7 @@
 import 'package:ai_teacher/firebase_options.dart';
 import 'package:ai_teacher/pages/answer_page.dart';
 import 'package:ai_teacher/pages/home_page.dart';
+import 'package:ai_teacher/pages/view_answer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const MyHomePage(),
         '/answer_page': (context) => const AnswerPage(),
+        '/view_answer': (context) => const ViewAnswer(),
       },
     );
   }

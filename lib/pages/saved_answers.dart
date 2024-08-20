@@ -38,7 +38,14 @@ class _SavedAnswersPageState extends State<SavedAnswersPage> {
     return Center(
       child: _docIds.isNotEmpty
           ? MyListView(
-              child: Text(_docIds[0]),
+              children: [
+                for (var id in _docIds)
+                  ListTile(
+                    title: Text(id),
+                    onTap: () => Navigator.pushNamed(context, '/view_answer',
+                        arguments: id),
+                  )
+              ],
             )
           : Lottie.asset("assets/ghost_loading.json"),
     );
