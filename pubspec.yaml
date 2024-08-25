@@ -44,6 +44,10 @@ dependencies:
   flutter_markdown: ^0.7.3
   lottie: ^3.1.2
   cloud_firestore: ^5.2.1
+  markdown: ^7.2.2
+  pdf: ^3.11.1
+  path_provider: ^2.1.4
+  flutter_native_html_to_pdf: ^1.0.1
 
 dev_dependencies:
   flutter_test:

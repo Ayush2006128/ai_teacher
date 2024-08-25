@@ -3,7 +3,7 @@ import 'package:ai_teacher/utils/answer_generation.dart';
 import 'package:ai_teacher/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:google_generative_ai/src/api.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:lottie/lottie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -39,17 +39,17 @@ class _AnswerPageState extends State<AnswerPage> {
         title: const Text('AI Teacher'),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.close_rounded)),
-          IconButton(
               onPressed: () async {
                 // saving result in firebase
                 await firestore
                     .collection("/answers")
                     .doc()
                     .set({"text": responseModel!.text.toString()});
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Answer Saved'),
+                  ),
+                );
               },
               icon: const Icon(Icons.save_rounded))
         ],

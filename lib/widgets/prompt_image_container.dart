@@ -30,27 +30,38 @@ class _PromptImageContainerState extends State<PromptImageContainer> {
               color: Colors.black,
             )),
         padding: const EdgeInsets.all(10),
-        child: Column(
+        child: Stack(
           children: [
-            const Expanded(child: Text("Upload Image")),
-            Flexible(
-              fit: FlexFit.loose,
+            const Positioned(
+              left: 0,
+              top: 0,
+              child: Expanded(
+                child: Text("Upload Image"),
+              ),
+            ),
+            Positioned(
+              left: 0,
+              bottom: 0,
               child: SizedBox(
                 height: 100, // Constrain the height of the list view
-                child: Row(
-                  children: [
-                    widget.imgPicker,
-                    Expanded(
-                      child: ListView.builder(
-                          itemCount: widget.imagePicked.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return widget.imagePicked[index];
-                          } // Pass single XFile
-                          ),
-                    ),
-                  ],
+                width: 250,
+                child: Flexible(
+                  fit: FlexFit.loose,
+                  child: Row(
+                    children: [
+                      widget.imgPicker,
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: widget.imagePicked.length,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return widget.imagePicked[index];
+                            } // Pass single XFile
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
